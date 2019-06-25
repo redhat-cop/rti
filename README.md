@@ -18,3 +18,6 @@ This app uses a captcha to ensure no robot creation of users.
 
 Securimage: A PHP class dealing with CAPTCHA images, audio, and validation
 https://www.phpcaptcha.org/documentation/quickstart-guide/
+
+To register with recaptcha, visit: https://www.google.com/recaptcha/intro/v3.html
+
