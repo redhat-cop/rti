@@ -389,7 +389,10 @@ return $rating;
 <p class="bigText">Ready to Innovate</p>
 <h2>Client Recommendations Document</h2>
 <h3>Prepared for <?php echo $data_array['client']; ?></h3>
-<h4>Date: <?php echo date('l jS \of F Y') ?></h4>
+
+<?php
+print "<h4>Date: " . date("l jS \of F Y", strtotime($data_array['date'])) . "</h4>";
+?>
 
 </center>
 <p>Thank you very much for taking part in a Ready To Innovate assessment.  This document provides a high level overview of the assessment and some possible next steps for <?php echo $data_array['client']; ?>.
