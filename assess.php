@@ -26,7 +26,7 @@ include('functionPutFieldsets.php');
 <script>$.fn.slider = null</script>  
 <script src="js/bootstrap-slider.js"></script>  
 <script src="js/bootstrap-toggle.min.js"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
 
 <script type="text/javascript" >
   $( function() {
@@ -83,14 +83,11 @@ $("#input").slider({
 				<?php if (isset($_SESSION['usr_id'])) { ?>
 				<li><a href="myrti.php">MyRTI</a></li>
 				<li><a href="assess.php">Run Assessment</a></li>
-				<li><p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p></li>
+				<li><a href="#">Signed in as <?php echo $_SESSION['usr_name']; ?></a></li>
 				<li><a href="logout.php">Log Out</a></li>
-				<li><a href="blog">Blog</a></li>
 				<?php } else { ?>
 				<li><a href="register.php">Register</a></li>
 				<li><a href="login.php">Login</a></li>
-				<li><a href="blog">Blog</a></li>
-
 				<?php } ?>
 
 			</ul>
@@ -159,6 +156,12 @@ The assessment is mainly based on the integration, processes and methods used by
 
 <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" name="share" id="share" data-size="normal" data-onstyle="success"  data-offstyle="danger" checked>
     <p class="mainTextItalic">Note: comparisons are only available if you opt-in to share data</p>
+
+<p>Is this a demonstration or test?</p>
+<input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" name="demo" id="demo" data-size="normal" data-onstyle="success" data-onstyle="info">
+<p class="mainTextItalic">Note: Demonstration/test data isn't used for comparison purposes.</p>
+
+
 <p>Please select Country and Line of Business using the drop down lists</p>
 <?php putCountries();?>
 

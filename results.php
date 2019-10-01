@@ -388,7 +388,7 @@ var data = {
     backgroundColor: "orange",
     data: <?php 
  #   $qq = "select avg(d1) as d1,avg(d2) as d2, avg(d3) as d3, avg(d4) as d4, avg(d5) as d5 from data;";    
-    $qq = "select ROUND(avg(d1),2) as d1, ROUND(avg(d2),2) as d2, ROUND(avg(d3),2) as d3, ROUND(avg(d4),2) as d4, ROUND(avg(d5),2) as d5 from data where share ='on';";    
+    $qq = "select ROUND(avg(d1),2) as d1, ROUND(avg(d2),2) as d2, ROUND(avg(d3),2) as d3, ROUND(avg(d4),2) as d4, ROUND(avg(d5),2) as d5 from data where share ='on' and demo <> 'on';";    
     $res = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
     $row = mysqli_fetch_array($res);
      echo "[" . $row[0] . "," . $row[1] . "," . $row[2] . "," . $row[3] . "," . $row[4] . "]"; 
@@ -425,7 +425,7 @@ var data = {
     label: "Average",
     backgroundColor: "orange",
     data: <?php 
-    $qq = "select ROUND(avg(d1),2) as d1, ROUND(avg(d2),2) as d2, ROUND(avg(d3),2) as d3, ROUND(avg(d4),2) as d4, ROUND(avg(d5),2) as d5 from data where share ='on' and lob = '" . $lob . "';";    
+    $qq = "select ROUND(avg(d1),2) as d1, ROUND(avg(d2),2) as d2, ROUND(avg(d3),2) as d3, ROUND(avg(d4),2) as d4, ROUND(avg(d5),2) as d5 from data where share ='on' and demo <> 'on' and lob = '" . $lob . "';";    
     $res = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
     $row = mysqli_fetch_array($res);
      echo "[" . $row[0] . "," . $row[1] . "," . $row[2] . "," . $row[3] . "," . $row[4] . "]"; 
@@ -462,7 +462,7 @@ var data = {
     label: "Average",
     backgroundColor: "orange",
     data: <?php 
-    $qq = "select ROUND(avg(o1),2) as o1, ROUND(avg(o2),2) as o2, ROUND(avg(o3),2) as o3, ROUND(avg(o4),2) as o4, ROUND(avg(o5),2) as o5 from data where share ='on' and lob = '" . $lob . "';";    
+    $qq = "select ROUND(avg(o1),2) as o1, ROUND(avg(o2),2) as o2, ROUND(avg(o3),2) as o3, ROUND(avg(o4),2) as o4, ROUND(avg(o5),2) as o5 from data where share ='on' and demo <> 'on' and lob = '" . $lob . "';";    
     $res = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
     $row = mysqli_fetch_array($res);
      echo "[" . $row[0] . "," . $row[1] . "," . $row[2] . "," . $row[3] . "," . $row[4] . "]"; 
@@ -500,7 +500,7 @@ var dataOps = {
     backgroundColor: "orange",
     data: <?php 
 #    $qq = "select avg(o1) as d1,avg(o2) as d2, avg(o3) as d3, avg(o4) as d4, avg(o5) as d5 from data;";    
-    $qq = "select ROUND(avg(o1),2) as o1, ROUND(avg(o2),2) as o2, ROUND(avg(o3),2) as o3, ROUND(avg(o4),2) as o4, ROUND(avg(o5),2) as o5 from data where share ='on';";    
+    $qq = "select ROUND(avg(o1),2) as o1, ROUND(avg(o2),2) as o2, ROUND(avg(o3),2) as o3, ROUND(avg(o4),2) as o4, ROUND(avg(o5),2) as o5 from data where share ='on' and demo <> 'on';";    
     $res = mysqli_query($GLOBALS["___mysqli_ston"], $qq);
     $row = mysqli_fetch_array($res);    
      echo "[" . $row[0] . "," . $row[1] . "," . $row[2] . "," . $row[3] . "," . $row[4] . "]"; 
