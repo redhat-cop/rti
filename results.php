@@ -294,7 +294,7 @@ foreach( $data_array as $var => $value )
     </div>
         <script>
 
-    var customerName = '<?php echo $data_array['client'] ?>'
+    var customerName = '<?php echo addslashes($data_array['client']); ?>'
     var customerNameNoSpaces = customerName.replace(/\s+/, "");
 
 
