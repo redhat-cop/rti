@@ -530,7 +530,7 @@ function getQueryVariable(variable)
        return(false);
 }    
 
-    var customerName = '<?php echo $data_array['client'] ?>'
+    var customerName = '<?php echo addslashes($data_array['client']) ?>'
     var customerNameNoSpaces = customerName.replace(/\s+/, "");
 
 
