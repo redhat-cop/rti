@@ -35,10 +35,15 @@ $(function() {
     });
 });
 </script>
+
+
 </head>
 
 
-<body>
+<body onload="myFunction()">
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
 
 <nav id="top" class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
@@ -84,12 +89,14 @@ $userName = $_SESSION['usr_name'];
     <thead>
     <tr>
         <th>Client Name</th>  
+        <th>Project/Team</th>  
         <th>Email Address</th>      
         <th>Country</th>
         <th>Line of Business</th>
         <th>Timestamp</th>
         <th>Customer Data</th>
         <th>Link to Output</th>
+        <th>Edit Details</th>
         <th>Delete</th>
     </tr>
     </thead>
@@ -104,8 +111,14 @@ while ($row = $res->fetch_assoc()) {
 	} else {
 	$demoData = "<img src=images/tick.png>";
 	}
+
+if ($row['project'] == "") {
+  $projDetails = " - ";
+} else {
+  $projDetails = $row['project'];
+}
 	
-print "<tr><td>" . $row['client'] . "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a href=results.php?hash=" . $row['hash'] . ">Link</a></td><td><a class=\"confirm\"  href=delete.php?hash=" . $row['hash'] . " ><img src=images/delete.png></a></td></tr>";
+print "<tr><td>" . $row['client'] . "</td><td>"  . $projDetails .  "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a href=results.php?hash=" . $row['hash'] . ">Link</a></td><td><a href=edit.php?hash=" . $row['hash'] . "><img src=images/edit.png></td><td><a class=\"confirm\"  href=delete.php?hash=" . $row['hash'] . " ><img src=images/delete.png></a></td></tr>";
 }
 
 #$q1 = "select lob, count(*) as total from data where demo <> 'on' group by lob order by total desc ;";
@@ -114,6 +127,7 @@ print "<tr><td>" . $row['client'] . "</td><td>" . $row['rhEmail'] . "</td><td>" 
 ?>
 <tbody>
 </table>
+
 
 
 <script type="text/javascript" >
@@ -202,6 +216,28 @@ $(document).ready( function () {
     $('#assessmentTable').DataTable();
 } );
 </script> 
+    <script>
+      function openForm() {
+        document.getElementById("popupForm").style.display="block";
+      }
+      
+      function closeForm() {
+        document.getElementById("popupForm").style.display="none";
+      }
+    </script>
 
+<script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 200);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>    
+    
 </body>
 </html>
