@@ -55,7 +55,7 @@ $(function() {
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="index.php"><img src="images/innovate.png">  Ready to Innovate?</a>
-			<div class="smallVersion">v2.0</div>
+
 		</div>
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
@@ -68,7 +68,6 @@ $(function() {
 				<li><a href="register.php">Register</a></li>
 				<li><a href="login.php">Login</a></li>
 				<?php } ?>
-
 			</ul>
 		</div>
 	</div>
@@ -84,6 +83,40 @@ $userName = $_SESSION['usr_name'];
 
 ?>
     <div class="container">
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  What's New?
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">New Features in RTI</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+		<p>New feature to delete assessments</p>		
+		<p>New feature to edit customer details such as name, project and comments.</p>		
+		<p>Graphs depicting Lines of Business for each users</p>
+		<p>Toggle to show if the assessment was used for demo purposes.  Demo data isn't included in comparison graphs</p>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>    
+    
+    
 <h3>Completed Assessments for <?php print $userName; ?> </h3>
 <table  class="bordered" id="assessmentTable">
     <thead>
@@ -185,7 +218,6 @@ $('a[href*="#"]')
  
  ['class Name','Students'],
  <?php 
-			#$query = "SELECT * from class";
  			$query = "select lob, count(*) as total from data where user=\"$userName\" and demo <> 'on' group by lob order by total desc ;";
 			 $exec = mysqli_query($db,$query);
 			 while($row = mysqli_fetch_array($exec)){
@@ -210,9 +242,8 @@ $('a[href*="#"]')
 	
     </script>
     
-<!--     <h2 id="graphs" style="padding-top: 500px;">Graphs</h2> -->
- <div id="columnchart12" style="width: 100%; height: 500px;"></div>
-<a href="#top">Scroll to Top</a>    
+ <div id="columnchart12"></div>
+
       </div>
     </div> <!-- /container -->
 <?php    }
