@@ -76,9 +76,9 @@ $row = $res->fetch_assoc();
     <p>Project/Team: <input  id="inputWidth" name="project" value="<?php print $row['project']; ?>"  ></p>
     <p>Email: <input  id="inputWidth" name="rhEmail" value="<?php print $row['rhEmail']; ?>"  ></p>
     <p>Comments: <input  id="inputWidth" name="comments" value="<?php print $row['comments']; ?>"  ></p>
-
     <input  name = "hash" type="hidden" value="<?php print $_REQUEST['hash']; ?>">
   <button type="submit" value="Submit">Update</button>
+  <button style="background-color: #ff0000; color: #000000; text-decoration: none;"><a href="myrti.php">Cancel</a></button>
 </form>
 
 
