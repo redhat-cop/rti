@@ -7,7 +7,7 @@
 <?php
 include 'dbconnect.php';
 connectDB();
-$qq = "UPDATE data SET client = '" . $_REQUEST['client'] . "', project = '" . $_REQUEST['project'] . "', rhEmail = '" . $_REQUEST['rhEmail'] . "' where hash = '" . $_REQUEST['hash'] . "';";
+$qq = "UPDATE data SET client = '" . $_REQUEST['client'] . "', project = '" . $_REQUEST['project'] . "', rhEmail = '" . $_REQUEST['rhEmail'] . "', comments = '" . $_REQUEST['comments'] . "' where hash = '" . $_REQUEST['hash'] . "';";
 $res = mysqli_query($db, $qq);
 ?>
 

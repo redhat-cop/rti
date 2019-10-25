@@ -19,12 +19,13 @@ header("Location: login.php");
 <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
 
+
 <script src="js/jquery-1.12.4.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/jquery.dataTables.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
 </head>
 
 
@@ -74,6 +75,8 @@ $row = $res->fetch_assoc();
     <p>Client Name: <input id="inputWidth" name="client" value="<?php print $row['client']; ?>" ></p>
     <p>Project/Team: <input  id="inputWidth" name="project" value="<?php print $row['project']; ?>"  ></p>
     <p>Email: <input  id="inputWidth" name="rhEmail" value="<?php print $row['rhEmail']; ?>"  ></p>
+    <p>Comments: <input  id="inputWidth" name="comments" value="<?php print $row['comments']; ?>"  ></p>
+
     <input  name = "hash" type="hidden" value="<?php print $_REQUEST['hash']; ?>">
   <button type="submit" value="Submit">Update</button>
 </form>

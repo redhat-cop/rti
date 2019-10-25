@@ -93,6 +93,7 @@ $userName = $_SESSION['usr_name'];
         <th>Email Address</th>      
         <th>Country</th>
         <th>Line of Business</th>
+        <th>Comments</th>
         <th>Timestamp</th>
         <th>Customer Data</th>
         <th>Link to Output</th>
@@ -117,8 +118,15 @@ if ($row['project'] == "") {
 } else {
   $projDetails = $row['project'];
 }
+
+if ($row['comments'] == "") {
+  $commentsDetails = " - ";
+} else {
+  $commentsDetails = $row['comments'];
+}
+
 	
-print "<tr><td>" . $row['client'] . "</td><td>"  . $projDetails .  "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a href=results.php?hash=" . $row['hash'] . ">Link</a></td><td><a href=edit.php?hash=" . $row['hash'] . "><img src=images/edit.png></td><td><a class=\"confirm\"  href=delete.php?hash=" . $row['hash'] . " ><img src=images/delete.png></a></td></tr>";
+print "<tr><td>" . $row['client'] . "</td><td>"  . $projDetails .  "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $commentsDetails . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a href=results.php?hash=" . $row['hash'] . ">Link</a></td><td><a href=edit.php?hash=" . $row['hash'] . "><img src=images/edit.png></td><td><a class=\"confirm\"  href=delete.php?hash=" . $row['hash'] . " ><img src=images/delete.png></a></td></tr>";
 }
 
 #$q1 = "select lob, count(*) as total from data where demo <> 'on' group by lob order by total desc ;";
