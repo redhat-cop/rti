@@ -25,6 +25,16 @@ header("Location: login.php");
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" >
+$(function() {
+    $('.confirm').click(function(e) {
+        e.preventDefault();
+        if (window.confirm("Are you sure you want to delete this item ?")) {
+            location.href = this.href;
+        }
+    });
+});
+</script>
 </head>
 
 
@@ -80,6 +90,7 @@ $userName = $_SESSION['usr_name'];
         <th>Timestamp</th>
         <th>Customer Data</th>
         <th>Link to Output</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -94,7 +105,7 @@ while ($row = $res->fetch_assoc()) {
 	$demoData = "<img src=images/tick.png>";
 	}
 	
-print "<tr><td>" . $row['client'] . "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a target=_ href=results.php?hash=" . $row['hash'] . ">Link</a></td></tr>";
+print "<tr><td>" . $row['client'] . "</td><td>" . $row['rhEmail'] . "</td><td>" . $row['country'] . "</td><td>" . $row['lob'] . "</td><td>" . $row['date'] . "</td><td>" . $demoData . "</td><td><a href=results.php?hash=" . $row['hash'] . ">Link</a></td><td><a class=\"confirm\"  href=delete.php?hash=" . $row['hash'] . " ><img src=images/delete.png></a></td></tr>";
 }
 
 #$q1 = "select lob, count(*) as total from data where demo <> 'on' group by lob order by total desc ;";
@@ -103,7 +114,6 @@ print "<tr><td>" . $row['client'] . "</td><td>" . $row['rhEmail'] . "</td><td>" 
 ?>
 <tbody>
 </table>
-<a href="#columnchart12">Scroll to Graphs</a>
 
 
 <script type="text/javascript" >
