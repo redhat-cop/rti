@@ -1,0 +1,7 @@
+/.project
+.DS_Store
+.idea
+*.swp
+__pycache__
+.odo
+.vscode
