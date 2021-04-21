@@ -1,0 +1,36 @@
+apiVersion: v1
+items:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: rti-db-init
+  spec:
+    backoffLimit: 0
+    template:
+      spec:
+        containers:
+          - name: mysql
+            image: image-registry.openshift-image-registry.svc:5000/openshift/mysql:8.0-el8
+            command: [ "/bin/sh","-c" ]
+            args: [ "curl https://raw.githubusercontent.com/redhat-cop/rti/master/database.sql | mysql --host=${MYSQL_SVC} --database=${MYSQL_DATABASE} --user=${MYSQL_USER} --password=${MYSQL_PASSWORD}" ]
+            env:
+              - name: MYSQL_SVC
+                value: mysql
+              - name: MYSQL_USER
+                valueFrom:
+                  secretKeyRef:
+                    key: database-user
+                    name: mysql
+              - name: MYSQL_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: database-password
+                    name: mysql
+              - name: MYSQL_DATABASE
+                valueFrom:
+                  secretKeyRef:
+                    key: database-name
+                    name: mysql
+        restartPolicy: Never
+kind: List
+metadata: {}

@@ -1,0 +1,171 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Secret
+  metadata:
+    name: captcha
+  stringData:
+    sitekey: replace_me
+    secretkey: replace_me
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: rti
+      app.kubernetes.io/component: rti
+      app.kubernetes.io/instance: rti
+    name: rti
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: ""
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: rti
+      app.kubernetes.io/component: rti
+      app.kubernetes.io/instance: rti
+    name: rti
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: rti:latest
+    postCommit: {}
+    resources: {}
+    source:
+      git:
+        uri: https://github.com/redhat-cop/rti.git
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: php:7.3-ubi8
+          namespace: openshift
+      type: Source
+    triggers:
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"rti:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"rti\")].image"}]'
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: rti
+      app.kubernetes.io/component: rti
+      app.kubernetes.io/instance: rti
+    name: rti
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        deployment: rti
+    strategy: {}
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          deployment: rti
+      spec:
+        containers:
+        - image: ' '
+          name: rti
+          env:
+            - name: MYSQL_SVC
+              value: mysql
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: database-user
+                  name: mysql
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: mysql
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: database-name
+                  name: mysql
+            - name: CAPTCHA_SITEKEY
+              valueFrom:
+                secretKeyRef:
+                  key: sitekey
+                  name: captcha
+            - name: CAPTCHA_SECRETKEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: captcha
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 8443
+            protocol: TCP
+          resources: {}
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: rti
+      app.kubernetes.io/component: rti
+      app.kubernetes.io/instance: rti
+    name: rti
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: 8443-tcp
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      deployment: rti
+  status:
+    loadBalancer: {}
+- kind: Route
+  apiVersion: route.openshift.io/v1
+  metadata:
+    name: rti
+    labels:
+      app: rti
+      app.kubernetes.io/component: rti
+      app.kubernetes.io/instance: rti
+  spec:
+    to:
+      kind: Service
+      name: rti
+      weight: 100
+    port:
+      targetPort: 8080-tcp
+    tls:
+      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
+    wildcardPolicy: None
+kind: List
+metadata: {}

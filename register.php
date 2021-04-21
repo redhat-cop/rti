@@ -22,6 +22,9 @@ connectDB();
 //set validation error flag as false
 $error = false;
 
+$captcha_sitekey = getenv('CAPTCHA_SITEKEY', true) ?: "REPLACE_ME";
+$captcha_secretkey = getenv('CAPTCHA_SECRETKEY', true) ?: "REPLACE_ME";
+
 //check if form is submitted
 if (isset($_POST['signup'])) {
 	$name = mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['name']);
@@ -64,7 +67,7 @@ curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
     CURLOPT_POST => 1,
     CURLOPT_POSTFIELDS => array(
-        'secret' => 'XXXXXXXXXXXXXXXXXXXXXXX',
+        'secret' => $captcha_secretkey,
         'response' => $_POST['g-recaptcha-response']
     )
 ));
@@ -86,7 +89,9 @@ if(strpos($resp, '"success": true') !== FALSE) {
 			$errormsg = "Error in registering...Please try again later!";
 		}
 
-} 
+} else {
+    $errormsg = "Error in siteverify for recaptcha...Please contact the site admin!";
+}
 
 }
 ?>
@@ -160,7 +165,7 @@ if(strpos($resp, '"success": true') !== FALSE) {
         <?php #echo Securimage::getCaptchaHtml() ?>
         						<span class="text-danger"><?php if (isset($captcha_error)) echo "<br>$captcha_error"; ?></span>
     </div>
-<div class="g-recaptcha" data-sitekey="XXXXXXXXXXXXXXXXXXXXXXXX"></div>
+<div class="g-recaptcha" data-sitekey="<?php echo $captcha_sitekey; ?>"></div>
 					<div class="form-group">
 						<input type="submit" name="signup" value="Sign Up" class="btn btn-primary" />
 					</div>

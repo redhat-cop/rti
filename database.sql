@@ -52,9 +52,9 @@ CREATE TABLE `data` (
   `comments_wayOfWorking` text DEFAULT NULL,
   `comments_architecture` text DEFAULT NULL,
   `comments_environment` text DEFAULT NULL,
-  `comments_visionLeadership` text DEFAULT NULL
+  `comments_visionLeadership` text DEFAULT NULL,
+  `demo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- --------------------------------------------------------
 
 --
