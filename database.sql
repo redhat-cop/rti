@@ -47,6 +47,7 @@ CREATE TABLE `data` (
   `hash` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `share` varchar(3) NOT NULL DEFAULT 'on',
+  `demo` varchar(3) NOT NULL DEFAULT 'No',
   `comments` text DEFAULT NULL,
   `comments_automation` text DEFAULT NULL,
   `comments_wayOfWorking` text DEFAULT NULL,
