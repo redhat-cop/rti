@@ -50,7 +50,7 @@ items:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          name: php:7.3-ubi8
+          name: php:7.4-ubi8
           namespace: openshift
       type: Source
     triggers:
